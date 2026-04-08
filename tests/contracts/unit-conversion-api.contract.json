@@ -1,0 +1,32 @@
+{
+  "openapi": "3.0.0",
+  "info": { "title": "Unit Conversion API - Contract", "version": "1.0.0" },
+  "paths": {
+    "/api/convert": {
+      "post": {
+        "summary": "Convert units",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fromUnit": { "type": "string" },
+                  "toUnit": { "type": "string" },
+                  "value": { "type": "number" }
+                },
+                "required": ["fromUnit","toUnit","value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Conversion result",
+            "content": { "application/json": { "schema": { "type": "object","properties":{"result":{"type":"number"}} } } }
+        }
+      }
+    }
+  }
+}

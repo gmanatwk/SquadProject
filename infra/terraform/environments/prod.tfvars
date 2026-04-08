@@ -1,0 +1,3 @@
+# Production environment variables (example)
+vnet_name = "squad-prod-vnet"
+# ...

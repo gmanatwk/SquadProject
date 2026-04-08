@@ -1,0 +1,3 @@
+# Dev environment variables (example)
+vnet_name = "squad-dev-vnet"
+# ...

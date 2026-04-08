@@ -1,0 +1,31 @@
+# Deploy to prod (template)
+name: Deploy Prod
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: ${{ steps.deploy-app.outputs.web_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Terraform Init
+        run: cd infra/terraform && terraform init
+      - name: Terraform Apply
+        run: cd infra/terraform && terraform apply -auto-approve -var-file=environments/prod.tfvars
+      # - name: Deploy App (placeholder)
+      #   run: echo "Deploying app..."
+    environment:
+      name: prod
+      url: ${{ steps.deploy-app.outputs.web_url }}
+    needs: approval
+  approval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approval Gate
+        uses: hmarr/await-approval@v1

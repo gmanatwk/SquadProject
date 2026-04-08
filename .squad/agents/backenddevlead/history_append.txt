@@ -1,0 +1,1 @@
+Scaffold run completed: created entities, controllers, services, MCP host stub, decisions, and skills notes.

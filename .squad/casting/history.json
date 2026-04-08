@@ -1,0 +1,20 @@
+{
+  "assignments": [
+    {
+      "assignment_id": "20260408-001",
+      "timestamp": "2026-04-08T17:53:12.558Z",
+      "user": "George V. Mavroudes",
+      "project": "SquadProject",
+      "universe_selected": "role_based",
+      "size": 5,
+      "shape": "full_stack_web_app",
+      "agents": [
+        "LeadArchitect",
+        "FrontendDevLead",
+        "BackendDevLead",
+        "DevOpsInfraLead",
+        "TestQALead"
+      ]
+    }
+  ]
+}

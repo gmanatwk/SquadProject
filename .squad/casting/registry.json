@@ -1,0 +1,44 @@
+{
+  "agents": [
+    {
+      "persistent_name": "LeadArchitect",
+      "role": "Lead",
+      "universe": "role_based",
+      "created_at": "2026-04-08T17:53:12.558Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    {
+      "persistent_name": "FrontendDevLead",
+      "role": "Frontend Dev",
+      "universe": "role_based",
+      "created_at": "2026-04-08T17:53:12.558Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    {
+      "persistent_name": "BackendDevLead",
+      "role": "Backend Dev",
+      "universe": "role_based",
+      "created_at": "2026-04-08T17:53:12.558Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    {
+      "persistent_name": "DevOpsInfraLead",
+      "role": "DevOps/Infra",
+      "universe": "role_based",
+      "created_at": "2026-04-08T17:53:12.558Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    {
+      "persistent_name": "TestQALead",
+      "role": "Tester",
+      "universe": "role_based",
+      "created_at": "2026-04-08T17:53:12.558Z",
+      "legacy_named": false,
+      "status": "active"
+    }
+  ]
+}

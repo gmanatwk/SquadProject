@@ -1,0 +1,19 @@
+# Terraform plan on PR (template)
+name: Terraform Plan
+on:
+  pull_request:
+    paths:
+      - 'infra/terraform/**'
+jobs:
+  terraform-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Terraform Init
+        run: cd infra/terraform && terraform init
+      - name: Terraform Plan
+        run: cd infra/terraform && terraform plan -var-file=environments/dev.tfvars

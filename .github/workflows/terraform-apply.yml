@@ -1,0 +1,20 @@
+# Terraform apply on merge (template)
+name: Terraform Apply
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'infra/terraform/**'
+jobs:
+  terraform-apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Terraform Init
+        run: cd infra/terraform && terraform init
+      - name: Terraform Apply
+        run: cd infra/terraform && terraform apply -auto-approve -var-file=environments/dev.tfvars

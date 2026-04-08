@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "universe_allowlist": [
+    "expanse",
+    "star_wars",
+    "foundation",
+    "dune",
+    "altered_carbon",
+    "neuromancer",
+    "hyperion",
+    "gideon_the_ninth",
+    "malazan",
+    "revelation_space",
+    "culture",
+    "commonwealth",
+    "zone",
+    "laundry_files",
+    "lost_fleet"
+  ],
+  "capacity": {
+    "min_agents": 1,
+    "max_agents": 8,
+    "recommended": "4-5"
+  },
+  "selection_strategy": "deterministic_scoring"
+}

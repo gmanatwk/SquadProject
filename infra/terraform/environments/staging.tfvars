@@ -1,0 +1,3 @@
+# Staging environment variables (example)
+vnet_name = "squad-staging-vnet"
+# ...

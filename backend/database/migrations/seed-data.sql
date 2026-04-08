@@ -1,0 +1,2 @@
+-- Initial seed data for EF Core migrations
+-- See scripts/seed-data.sql for details

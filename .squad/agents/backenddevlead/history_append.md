@@ -1,0 +1,1 @@
+Scaffold run: created core entities, controllers, services, MCP host stub, and decision/skill notes.
