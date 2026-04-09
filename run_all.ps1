@@ -45,7 +45,20 @@ function Start-Backend {
 function Start-Frontend {
     Write-Status "Starting frontend dev server..." 'Yellow'
     $frontendPath = "${PSScriptRoot}\frontend"
-    $frontendProc = Start-Process 'npm' -ArgumentList 'run start' -WorkingDirectory $frontendPath -NoNewWindow -PassThru
+    # On Windows, 'npm' is a batch script (npm.cmd). Start-Process can fail with "%1 is not a valid Win32 application" when calling the shell script directly.
+    # Use npm.cmd explicitly, or run via cmd.exe /c as a fallback.
+    if (Test-Path (Join-Path $env:windir 'System32\npm.cmd')) {
+        $npmExe = 'npm.cmd'
+    } else {
+        $npmExe = 'npm.cmd'
+    }
+
+    try {
+        $frontendProc = Start-Process $npmExe -ArgumentList 'run start' -WorkingDirectory $frontendPath -NoNewWindow -PassThru
+    } catch {
+        # Fallback: run via cmd /c
+        $frontendProc = Start-Process 'cmd.exe' -ArgumentList '/c npm run start' -WorkingDirectory $frontendPath -NoNewWindow -PassThru
+    }
 }
 function Stop-All {
     Write-Status "Stopping all processes..." 'Yellow'
@@ -93,13 +106,13 @@ try {
 # 4. Start backend
 Start-Backend
 
-# 5. Wait for backend to be ready
-Write-Status "Waiting for backend to be ready on http://localhost:5000 ..." 'Yellow'
+# 5. Wait for backend to be ready by probing the /health endpoint
+Write-Status "Waiting for backend health endpoint http://localhost:5000/health ..." 'Yellow'
 $maxTries = 20
 $ready = $false
 for ($i=0; $i -lt $maxTries; $i++) {
     try {
-        $resp = Invoke-WebRequest -Uri 'http://localhost:5000' -UseBasicParsing -TimeoutSec 2
+        $resp = Invoke-WebRequest -Uri 'http://localhost:5000/health' -UseBasicParsing -TimeoutSec 2
         if ($resp.StatusCode -eq 200) {
             $ready = $true
             break
@@ -108,11 +121,11 @@ for ($i=0; $i -lt $maxTries; $i++) {
     Start-Sleep -Seconds 1
 }
 if (-not $ready) {
-    Write-Failure "Backend did not start in time."
+    Write-Failure "Backend did not become healthy in time."
     Stop-All
     exit 1
 }
-Write-Success "Backend is ready."
+Write-Success "Backend health check returned 200."
 
 # 6. Start frontend
 Start-Frontend

@@ -111,6 +111,12 @@ dotnet test
 - Logging: configure in `appsettings.*.json`
 - CORS: allow frontend communication (see `Program.cs`)
 
+### Local development notes
+
+- A default `appsettings.json` is present at [backend/SquadProject.Api/appsettings.json](appsettings.json) and provides a local `ConnectionStrings:DefaultConnection` fallback for development.
+- The project exposes a strongly-typed `BackendSettings` model at [backend/SquadProject.Api/Configuration/BackendSettings.cs](Configuration/BackendSettings.cs). The app prefers environment variables (or CI/CD secrets) and falls back to `appsettings.json` values when running locally.
+- A `launchSettings.json` is provided at [backend/SquadProject.Api/Properties/launchSettings.json](Properties/launchSettings.json) with an example development profile and example environment variables. Use Visual Studio or `dotnet run` to start the app.
+
 ## 12. Environment Variables
 
 - `ASPNETCORE_ENVIRONMENT` (Development, Production, Staging)

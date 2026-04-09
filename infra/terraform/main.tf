@@ -16,7 +16,9 @@ module "database" {
 module "app_service" {
   source = "./modules/app-service"
   # app_service_plan_name = var.app_service_plan_name
-  # ...
+  # Pass backend configuration variables to the app service module so they can be set as app settings/environment variables
+  backend_default_connection = var.backend_default_connection
+  backend_example_secret    = var.backend_example_secret
 }
 
 module "monitoring" {

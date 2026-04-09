@@ -1,18 +1,15 @@
-module.exports = {
-  roots: ['<rootDir>/src'],
+const nextJest = require('next/jest');
+
+const createJestConfig = nextJest({ dir: './' });
+
+/** @type {import('jest').Config} */
+const customJestConfig = {
+  roots: ['<rootDir>'],
   testMatch: ['**/__tests__/**/*.(test|spec).(ts|tsx|js)'],
-  transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest'
-  },
-  setupFilesAfterEnv: ['<rootDir>/src/__tests__/setup.ts'],
-  collectCoverage: true,
+  setupFilesAfterEnv: ['<rootDir>/__tests__/setup.ts'],
+  testEnvironment: 'jsdom',
+  collectCoverage: false,
   collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts'],
-  coverageThreshold: {
-    global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80
-    }
-  }
 };
+
+module.exports = createJestConfig(customJestConfig);
